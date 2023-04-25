@@ -33,31 +33,27 @@
 			src: url("./fonts/PressStart2P.ttf") format('truetype');
 		}
 
-		body{
-			background-color: #029ecc;
-		}
-
-		@media only screen and (min-width: 775px) {
 		body {
+			background-color: #029ecc;
+			padding: 0;
+			margin: 0;
+			outline: 0;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			height: 100vh;
 			align-items: center;
 			background-image: url('./images/sky_bg.jpg');
 			background-size: cover;
 			background-repeat: no-repeat;
-		}
-
-		.footer {
-			bottom: 0 !important;
-		}
-	}
+		} 
 	</style>
 </head>
 
-<body style="padding:0;margin:0;outline:0;overflow:hidden;display: flex;justify-content: center;height: 100vh;">
+<body>
 	<div id="game" style="position: relative;">
 		<canvas id="canvas"></canvas>
-		<!-- <div class="timer speedup" style="top: 10px;"> <span>X</span><span id="speedup-level">1</span></div> -->
 		<div class="footer">
-			<!-- <button type="button" class="btn btn-boost" onclick="speedUp()">Boost</button> -->
 			<div class="timer"> <span>00:</span><span id="timer">45</span></div>
 		</div>
 	</div>
@@ -78,9 +74,7 @@
 			<div class="header text-center">
 				<img src="./images/header.png" />
 			</div>
-			<!-- <div class="icon-game">
-				<img class="shadowed" src="./images/splash.png" width="100%" />
-			</div> -->
+
 			<div class="button-group">
 				<div class="footer-tower">
 					<div class="footer-tower-overlay"></div>
@@ -88,7 +82,7 @@
 					<img onclick="gameStart(1)" class="btn-start" src="./images/tap-to-play.png" />
 					<img class="tower-right" src="./images/footer_tower_right.png" />
 				</div>
-			</div> 
+			</div>
 		</div>
 		<div id="screen-gameover" class="screen screen-gameover bg-shadow hidden">
 			<img class="w-70" src="./images/game-over.png" />
@@ -108,30 +102,13 @@
 				<div class="footer-tower">
 					<div class="footer-tower-overlay"></div>
 					<img class="tower-left" src="./images/footer_tower_left.png" />
-					<img id="btn-playagain" class="btn-playagain" src="./images/play-again.png" />
+					<button onclick="clearCanvas(); gameStart(1);">
+						<img class="btn-playagain" src="./images/play-again.png" />
+					</button>
 					<img class="tower-right" src="./images/footer_tower_right.png" />
 				</div>
-			</div>			 
-		</div>
-
-		<!-- <div id="screen-result" class="container bg-shadow hidden">
-			<div class="all-screens"> 
-				<div class="screen " id="screen-board">
-					<div class="main-content text-center mt-lg">
-						<h2 class="score total-score">10</h2>
-						<h2 class="score rank"><span id="js-rank-score"></span>/300</h2>
-					</div>
-					<div class="button-group">
-						<div class="footer-tower">
-							<div class="footer-tower-overlay"></div>
-							<img class="tower-left" src="./images/footer_tower_left.png" />
-							<img id="btn-playagain" class="btn-playagain" src="./images/play-again.png" />
-							<img class="tower-right" src="./images/footer_tower_right.png" />
-						</div>
-					</div>
-				</div> 
 			</div>
-		</div> -->
+		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>

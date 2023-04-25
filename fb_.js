@@ -48,11 +48,6 @@ if (localStorage.getItem('_soundOn') === 'false') {
   soundOn = false;
 }
 
-var clearCanvas = function () {
-  ctx.fillStyle = '#03c5ff';
-  ctx.fillRect(0, 0, width, height);
-};
-
 var soundBackground,
   soundStart,
   soundWin,
@@ -174,6 +169,11 @@ var loadImages = function () {
   blankPipe = new Image();
   blankPipe.src = 'images/blank-pipe.png';
   blankPipe.onload = onImgLoad;
+};
+
+function clearCanvas () {
+  ctx.fillStyle = '#03c5ff';
+  ctx.fillRect(0, 0, width, height);
 };
 
 function loadSounds(url) {
@@ -825,11 +825,13 @@ window.onload = function () {
   loadSounds();
   soundControl();
 
+  // listener
   window.onresize = function () {
     canvas.width = width = Math.min(875, window.innerWidth);
     canvas.height = height = Math.min(875, window.innerHeight);
     drawCanvas();
   };
+
 };
 
 function addClassTo(el, className) {
@@ -855,12 +857,7 @@ function openEndScreen() {
   addClassTo('#screen-start', 'hidden');
 
   $('#total-score').html(score);
-
-  $('#btn-playagain').click(function () {
-    clearCanvas();
-    gameStart(1);
-  });
-
+ 
   $('#screen-gameover').click(function () {
     soundOn && soundWin.play();
     showResultBoard();

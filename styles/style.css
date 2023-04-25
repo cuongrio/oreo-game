@@ -33,9 +33,13 @@
     width: 70% !important;
 }
 
-.overide-screen { 
-    max-width: 875px;
-    max-height: 880px;
+#game {
+    overflow: hidden;
+}
+
+.overide-screen {
+    /* max-width: 875px;
+    max-height: 880px; */
     width: 100%;
     height: 100%;
     /* background: #000; */
@@ -46,9 +50,8 @@
     justify-content: center;
     top: 50%;
     transform: translateY(-50%);
+    overflow: hidden;
 }
-
-
 
 .container {
     background-image: url(../images/sky.jpg);
@@ -154,17 +157,17 @@ canvas {
     height: 40px;
 }
 
-.btn-close{
+.btn-close {
     background: none !important;
     border: none !important;
     display: block;
-    width: auto; 
+    width: auto;
     width: 48px;
     height: 48px;
     z-index: 999;
 }
 
-.btn-close img{
+.btn-close img {
     width: 32px;
     height: 32px;
 }
@@ -366,7 +369,7 @@ canvas {
     padding: 26px 0;
     bottom: 0;
     width: 100%;
-    z-index: 0; 
+    z-index: 0;
 }
 
 .footer .time {

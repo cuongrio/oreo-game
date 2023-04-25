@@ -816,11 +816,39 @@ var gameStart = function (mode) {
   addClassTo('#screen-start', 'hidden');
   jump();
 };
-window.onload = function () {
-  document.getElementById('screen-start').width = Math.min(875, window.innerWidth);
-  document.getElementById('screen-start').height = Math.min(875, window.innerWidth);
-  $('#game .timer').hide();
 
+function fixBoxSize(screenId, width, height) {
+  // $(screenId).css('width', `${width}px`);
+  // $(screenId).css('height', `height`);
+  console.log('width, height', width, height);
+  $(screenId).width(width).height(height);
+}
+
+function onResize() {
+  // fix height
+  const screenHeight = window.innerHeight;
+  let screenWidth = window.innerWidth;
+
+  if (screenWidth > 480) {
+    screenWidth = (screenHeight * 320) / 455;
+  }
+  fixBoxSize('#game', screenWidth, screenHeight);
+  fixBoxSize('#screen-start', screenWidth, screenHeight);
+  fixBoxSize('#screen-gameover', screenWidth, screenHeight); 
+  fixBoxSize('#screen-board', screenWidth, screenHeight);
+
+  if(canvas){
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
+    drawCanvas();
+  }
+  
+}
+
+window.onload = function () {
+  onResize();
+
+  // reset variable
   mode = 0;
   score = 0;
   realScore = -1;
@@ -831,12 +859,11 @@ window.onload = function () {
   initCanvas();
   loadSounds();
   soundControl();
+  $('#game .timer').hide();
 
-  window.onresize = function () {
-    canvas.width = width = Math.min(875, window.innerWidth);
-    canvas.height = height = Math.min(875, window.innerHeight);
-    drawCanvas();
-  };
+  // window.onresize = function () {
+  //   onResize();
+  // };
 };
 
 function addClassTo(el, className) {
@@ -865,12 +892,7 @@ function openEndScreen() {
     soundOn && soundWin.play();
     showResultBoard();
   }
-
-  $('#btn-playagain').click(function () {
-    clearCanvas();
-    gameStart(1);
-  });
-
+ 
   $('#screen-gameover').click(function () {
     soundOn && soundWin.play();
     showResultBoard();

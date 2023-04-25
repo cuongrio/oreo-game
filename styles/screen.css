@@ -83,19 +83,19 @@
 .screen-start {
     width: 100%;
     height: 100%;
+    min-width: 320px;
+    min-height: 455px;
+
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-
     z-index: 999;
     overflow: hidden;
-    /*padding: 40px 0 40px;*/
     justify-content: flex-start;
-    min-height: auto;
 
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); 
 }
 
 .screen-start .btn-close {
@@ -139,11 +139,11 @@
 }
 
 /* PHONE */
-@media only screen and (max-width: 775px) {
+@media only screen and (max-width: 600px) {
     .screen-start .header {
-        padding: 80px 32px 0px 32px;
+        padding: 64px 32px 0px 32px;
     }
- 
+
     .screen-start .header img {
         max-width: 320px;
     }
@@ -175,15 +175,15 @@
 }
 
 /* MEDIUM */
-@media only screen and (min-width: 776px) {
+@media only screen and (min-width: 601px) {
     .screen-start {
         background: url("../images/sky.jpg");
         background-color: #99d9f4;
         background-repeat: no-repeat;
         background-position: bottom left;
         background-size: cover;
-        max-width: 875px;
-        max-height: 875px;
+        /* max-width: 875px;
+        max-height: 875px; */
         width: 100%;
         height: 100%;
         display: flex;
@@ -201,13 +201,21 @@
     }
 
     .screen-start .header {
-        padding: 32px 32px 0px 32px;
+        padding-top: 64px;
+        width: 100%;
+    }
+
+    .screen-start .header img {
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
     }
 
     .screen-start .btn-close {
         top: 50px;
         right: 16px;
-    } 
+    }
 
     .screen-start .sound-box {
         top: 50px;
@@ -215,7 +223,7 @@
     }
 
     .screen-start .footer-tower-overlay {
-        height: 102px;
+        height: 160px;
     }
 
     .screen-start .tower-left {
@@ -223,13 +231,14 @@
         left: 50%;
         transform: translate(-50%, 0);
         z-index: 9;
-        bottom: 0;
-        margin-left: -165px;
+        bottom: 70px;
+        margin-left: -154px;
+        max-width: 136px;
     }
 
 
     .screen-start .btn-start {
-        bottom: -12px;
+        bottom: 40px;
     }
 
     .screen-start .tower-right {
@@ -237,8 +246,9 @@
         right: 50%;
         transform: translate(-50%, 0);
         z-index: 9;
-        bottom: 0;
-        margin-right: -330px;
+        bottom: 70px;
+        margin-right: -295px;
+        max-width: 136px;
     }
 }
 
@@ -253,14 +263,24 @@
 .screen-gameover>img {
     max-width: 500px;
 }
-
-/* SCREEN SCORE  */
+ 
+/* SCREEN START */
 .screen-board {
-    flex-flow: column;
-    position: relative;
     width: 100%;
-    margin: 0 auto;
-    text-align: center;
+    height: 100%;
+    min-width: 320px;
+    min-height: 455px;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    z-index: 999;
+    overflow: hidden;
+    justify-content: flex-start;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 .screen-board .btn-close {
@@ -273,6 +293,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+    z-index: 2;
 }
 
 .screen-board .button-group {
@@ -317,10 +338,9 @@
 }
 
 /* PHONE */
-@media only screen and (max-width: 775px) {
-
+@media only screen and (max-width: 600px) {
     .screen-board .header {
-        padding: 80px 32px 0px 32px;
+        padding: 64px 32px 0px 32px;
     }
 
     .screen-board .header img {
@@ -332,19 +352,24 @@
     }
 
     .screen-board .tower-left {
+        width: 105px;
         position: absolute;
-        left: 10px;
         z-index: 9;
         bottom: 70px;
-        width: 105px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-left: -130px;
     }
 
     .screen-board .tower-right {
         position: absolute;
-        right: 10px;
         z-index: 9;
         bottom: 70px;
         width: 105px;
+
+        right: 50%;
+        transform: translate(-50%, 0);
+        margin-right: -240px;
     }
 
     .screen-board .total-score {
@@ -361,15 +386,15 @@
 }
 
 /* DESKTOP */
-@media only screen and (min-width: 776px) {
+@media only screen and (min-width: 601px) {
     .screen-board {
         background: url("../images/sky.jpg");
         background-color: #99d9f4;
         background-repeat: no-repeat;
         background-position: bottom left;
         background-size: cover;
-        max-width: 875px;
-        max-height: 875px;
+        /* max-width: 875px;
+        max-height: 875px; */
         width: 100%;
         height: 100%;
         display: flex;
@@ -387,9 +412,17 @@
     }
 
     .screen-board .header {
-        padding: 32px 32px 0px 32px;
+        padding-top: 64px;
+        width: 100%;
     }
- 
+    
+    .screen-board .header img {
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+    }
+
     .screen-board .footer-tower-overlay {
         height: 95px;
     }
@@ -414,12 +447,12 @@
     }
 
     .screen-board .total-score {
-        bottom: 132px;
+        bottom: 80px;
         font-size: 42px;
     }
 
     .screen-board .rank {
-        bottom: 10px;
+        bottom: -8px;
         font-size: 42px;
     }
 
