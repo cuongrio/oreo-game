@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="dns-prefetch" href="http://res.wx.qq.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<title>Oreo Back to School</title>
+	<meta property="og:title" content="Oreo Back to School">
+	<meta name="description" content="Oreo Back to School">
+	<script type='application/javascript' src="fastclick.js"></script>
+	<link href="./styles/style.css" rel="stylesheet" />
+	<link href="./styles/screen.css" rel="stylesheet" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script type="application/javascript" src="fb.js"></script>
+	<style>
+		@font-face {
+			font-family: BwSurcoBlackItalic;
+			src: url("./fonts/BwSurcoDEMO-BlackItalic.otf") format("opentype");
+		}
+
+		@font-face {
+			font-family: BwSurcoBoldItalic;
+			src: url("./fonts/BwSurcoDEMO-BoldItalic.otf") format("opentype");
+		}
+
+		@font-face {
+			font-family: "Press Start 2P";
+			src: url("./fonts/PressStart2P.ttf") format('truetype');
+		}
+	</style>
+</head>
+
+<body style="padding:0;margin:0;outline:0;overflow:hidden;display: flex;justify-content: center;height: 100vh;">
+	<div id="game" style="position: relative;">
+		<canvas id="canvas"></canvas>
+		<!-- <div class="timer speedup" style="top: 10px;"> <span>X</span><span id="speedup-level">1</span></div> -->
+		<div class="footer">
+			<!-- <button type="button" class="btn btn-boost" onclick="speedUp()">Boost</button> -->
+			<div class="timer"> <span>00:</span><span id="timer">45</span></div>
+		</div>
+	</div>
+	<div class="overide-screen" id="screen-group">
+		<div class="screen-start bg-shadow" id="screen-start">
+			<div class="sound-box">
+				<button id="js-sound-on" class="sound-ctrl">
+					<img src="./images/soundon_48.png" />
+				</button>
+				<button id="js-sound-off" class="sound-ctrl hidden">
+					<img src="./images/soundoff_48.png" />
+				</button>
+			</div>
+
+			<div class="header text-center">
+				<img src="./images/header.png" />
+			</div>
+			<!-- <div class="icon-game">
+				<img class="shadowed" src="./images/splash.png" width="100%" />
+			</div> -->
+			<div class="button-group">
+				<div class="footer-tower">
+					<div class="footer-tower-overlay"></div>
+					<img class="tower-left" src="./images/footer_tower_left.png" />
+					<img onclick="gameStart(1)" class="btn-start" src="./images/tap-to-play.png" />
+					<img class="tower-right" src="./images/footer_tower_right.png" />
+				</div>
+			</div>
+		</div>
+		<div id="screen-gameover" class="screen screen-gameover bg-shadow hidden">
+			<img class="w-70" src="./images/game-over.png" />
+		</div>
+		<div id="screen-board" class="screen container screen-board bg-shadow">
+			<div class="header text-center">
+				<img src="./images/leader_board_bg.png" />
+				<h2 id="total-score" class="score total-score">-</h2>
+				<h2 class="score rank"><span id="js-rank-score"></span>/<span id="js-rank-totalplayer"></span></h2>
+			</div>
+
+			<div class="button-group">
+				<div class="footer-tower">
+					<div class="footer-tower-overlay"></div>
+					<img class="tower-left" src="./images/footer_tower_left.png" />
+					<img id="btn-playagain" class="btn-playagain" src="./images/play-again.png" />
+					<img class="tower-right" src="./images/footer_tower_right.png" />
+				</div>
+			</div>
+		</div>
+		
+		<!-- <div id="screen-result" class="container bg-shadow hidden">
+			<div class="all-screens"> 
+				<div class="screen " id="screen-board">
+					<div class="main-content text-center mt-lg">
+						<h2 class="score total-score">10</h2>
+						<h2 class="score rank"><span id="js-rank-score"></span>/300</h2>
+					</div>
+					<div class="button-group">
+						<div class="footer-tower">
+							<div class="footer-tower-overlay"></div>
+							<img class="tower-left" src="./images/footer_tower_left.png" />
+							<img id="btn-playagain" class="btn-playagain" src="./images/play-again.png" />
+							<img class="tower-right" src="./images/footer_tower_right.png" />
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div> -->
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+
+</body>
+
+</html>
