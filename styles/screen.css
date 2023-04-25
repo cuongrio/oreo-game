@@ -143,7 +143,7 @@
     .screen-start .header {
         padding: 80px 32px 0px 32px;
     }
-
+ 
     .screen-start .header img {
         max-width: 320px;
     }
@@ -175,12 +175,13 @@
 }
 
 /* MEDIUM */
-@media only screen and (min-width: 776px) { 
-    .screen-start { 
+@media only screen and (min-width: 776px) {
+    .screen-start {
         background: url("../images/sky.jpg");
         background-color: #99d9f4;
         background-repeat: no-repeat;
         background-position: bottom left;
+        background-size: cover;
         max-width: 875px;
         max-height: 875px;
         width: 100%;
@@ -201,6 +202,16 @@
 
     .screen-start .header {
         padding: 32px 32px 0px 32px;
+    }
+
+    .screen-start .btn-close {
+        top: 50px;
+        right: 16px;
+    } 
+
+    .screen-start .sound-box {
+        top: 50px;
+        right: 56px;
     }
 
     .screen-start .footer-tower-overlay {
@@ -306,7 +317,7 @@
 }
 
 /* PHONE */
-@media only screen and (max-width: 775px) { 
+@media only screen and (max-width: 775px) {
 
     .screen-board .header {
         padding: 80px 32px 0px 32px;
@@ -351,11 +362,12 @@
 
 /* DESKTOP */
 @media only screen and (min-width: 776px) {
-    .screen-board { 
+    .screen-board {
         background: url("../images/sky.jpg");
         background-color: #99d9f4;
         background-repeat: no-repeat;
         background-position: bottom left;
+        background-size: cover;
         max-width: 875px;
         max-height: 875px;
         width: 100%;
@@ -377,7 +389,7 @@
     .screen-board .header {
         padding: 32px 32px 0px 32px;
     }
-
+ 
     .screen-board .footer-tower-overlay {
         height: 95px;
     }
@@ -415,15 +427,3 @@
         bottom: -20px;
     }
 }
-
-
-
-/* LARGE  */
-@media (min-width: 1585px) { 
-    .container,
-    .screen-board,
-    .screen-start {
-        background-size: cover;
-    }
-}
-
