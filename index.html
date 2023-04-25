@@ -32,6 +32,23 @@
 			font-family: "Press Start 2P";
 			src: url("./fonts/PressStart2P.ttf") format('truetype');
 		}
+
+		body{
+			background-color: #029ecc;
+		}
+
+		@media only screen and (min-width: 775px) {
+		body {
+			align-items: center;
+			background-image: url('https://cdx.flowco.io/prod/uploads/images/1629695958772-88.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+		.footer {
+			bottom: 0 !important;
+		}
+	}
 	</style>
 </head>
 
@@ -54,6 +71,9 @@
 					<img src="./images/soundoff_48.png" />
 				</button>
 			</div>
+			<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
+				<img src="./images/close.png" />
+			</button>
 
 			<div class="header text-center">
 				<img src="./images/header.png" />
@@ -68,7 +88,7 @@
 					<img onclick="gameStart(1)" class="btn-start" src="./images/tap-to-play.png" />
 					<img class="tower-right" src="./images/footer_tower_right.png" />
 				</div>
-			</div>
+			</div> 
 		</div>
 		<div id="screen-gameover" class="screen screen-gameover bg-shadow hidden">
 			<img class="w-70" src="./images/game-over.png" />
@@ -80,6 +100,10 @@
 				<h2 class="score rank"><span id="js-rank-score"></span>/<span id="js-rank-totalplayer"></span></h2>
 			</div>
 
+			<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
+				<img src="./images/close.png" />
+			</button>
+
 			<div class="button-group">
 				<div class="footer-tower">
 					<div class="footer-tower-overlay"></div>
@@ -87,9 +111,9 @@
 					<img id="btn-playagain" class="btn-playagain" src="./images/play-again.png" />
 					<img class="tower-right" src="./images/footer_tower_right.png" />
 				</div>
-			</div>
+			</div>			 
 		</div>
-		
+
 		<!-- <div id="screen-result" class="container bg-shadow hidden">
 			<div class="all-screens"> 
 				<div class="screen " id="screen-board">

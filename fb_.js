@@ -67,7 +67,7 @@ var soundBackground,
   soundCountdown;
 var extraScore, lastTimeExtraScore;
 var isDropMode = 1;
-var disableAddScore = false;
+
 var loadImages = function () {
   var imgNumber = 5,
     imgComplete = 0;
@@ -370,7 +370,6 @@ var drawLand = function () {
 };
 
 var addScore = function (val) {
-  console.log(val);
   score += val;
   lastTimeExtraScore = new Date().getTime();
   soundOn && soundEarnPoint.play();
@@ -468,13 +467,7 @@ var drawPipeItem = function (x, y, mode, isBreak, isBlank) {
 var drawStarX = function (x, y) {
   var STAR_WITH = 40;
   if (x < birdPos + STAR_WITH && x + STAR_WITH > birdPos && Math.abs(birdY - y) < STAR_WITH + 5) {
-    if (!disableAddScore) {
-      addScore(5);
-    }
-    disableAddScore = true;
-    setTimeout(() => {
-      disableAddScore = false;
-    }, 500);
+    addScore(5);
   } else {
     ctx.drawImage(star, x + STAR_WITH, y);
   }
@@ -854,17 +847,14 @@ function switchScreen(screenId) {
 
 function openEndScreen() {
   soundStart.stop();
+
+  // game over
+  switchScreen('screen-gameover');
+
   addClassTo('#footer-game', 'hidden');
   addClassTo('#screen-start', 'hidden');
-  $('#total-score').html(score);
 
-  if (countDown > 0) {
-    // game over
-    switchScreen('screen-gameover');
-  } else {
-    soundOn && soundWin.play();
-    showResultBoard();
-  }
+  $('#total-score').html(score);
 
   $('#btn-playagain').click(function () {
     clearCanvas();
@@ -915,10 +905,6 @@ function soundControl() {
     soundOn = true;
     localStorage.setItem('_soundOn', true);
   });
-}
-
-function closePopup() {
-  window.parent.postMessage('closePopup', '*');
 }
 
 function share(type) {
