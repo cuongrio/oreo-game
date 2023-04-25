@@ -1,5 +1,5 @@
 .screen {
-    display: none;
+    display: none !important;
 }
 
 .screen.active {
@@ -447,12 +447,12 @@
     }
 
     .screen-board .total-score {
-        bottom: 80px;
-        font-size: 42px;
+        bottom: 64px;
+        font-size: 48px;
     }
 
     .screen-board .rank {
-        bottom: -8px;
+        bottom: -20px;
         font-size: 42px;
     }
 

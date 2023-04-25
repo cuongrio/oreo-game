@@ -46,66 +46,68 @@
 			background-image: url('./images/sky_bg.jpg');
 			background-size: cover;
 			background-repeat: no-repeat;
-		} 
+		}
 	</style>
 </head>
 
 <body>
-	<div id="game" style="position: relative;">
-		<canvas id="canvas"></canvas>
-		<div class="footer">
-			<div class="timer"> <span>00:</span><span id="timer">45</span></div>
+	<div class="content-wrapper" id="content-wrapper">
+		<div id="game" style="position: absolute; width: 100%; height: 100%">
+			<canvas id="canvas"></canvas>
+			<div class="footer">
+				<div class="timer"> <span>00:</span><span id="timer">45</span></div>
+			</div>
 		</div>
-	</div>
-	<div class="overide-screen" id="screen-group">
-		<div class="screen-start bg-shadow" id="screen-start">
-			<div class="sound-box">
-				<button id="js-sound-on" class="sound-ctrl">
-					<img src="./images/soundon_48.png" />
+		<div class="overide-screen" id="screen-group">
+			<div class="screen-start bg-shadow" id="screen-start">
+				<div class="sound-box">
+					<button id="js-sound-on" class="sound-ctrl">
+						<img src="./images/soundon_48.png" />
+					</button>
+					<button id="js-sound-off" class="sound-ctrl hidden">
+						<img src="./images/soundoff_48.png" />
+					</button>
+				</div>
+				<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
+					<img src="./images/close.png" />
 				</button>
-				<button id="js-sound-off" class="sound-ctrl hidden">
-					<img src="./images/soundoff_48.png" />
-				</button>
-			</div>
-			<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
-				<img src="./images/close.png" />
-			</button>
 
-			<div class="header text-center">
-				<img src="./images/header.png" />
-			</div>
+				<div class="header text-center">
+					<img src="./images/header.png" />
+				</div>
 
-			<div class="button-group">
-				<div class="footer-tower">
-					<div class="footer-tower-overlay"></div>
-					<img class="tower-left" src="./images/footer_tower_left.png" />
-					<img onclick="gameStart(1)" class="btn-start" src="./images/tap-to-play.png" />
-					<img class="tower-right" src="./images/footer_tower_right.png" />
+				<div class="button-group">
+					<div class="footer-tower">
+						<div class="footer-tower-overlay"></div>
+						<img class="tower-left" src="./images/footer_tower_left.png" />
+						<img onclick="gameStart(1)" class="btn-start" src="./images/tap-to-play.png" />
+						<img class="tower-right" src="./images/footer_tower_right.png" />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="screen-gameover" class="screen screen-gameover bg-shadow hidden">
-			<img class="w-70" src="./images/game-over.png" />
-		</div>
-		<div id="screen-board" class="screen container screen-board bg-shadow">
-			<div class="header text-center">
-				<img src="./images/leader_board_bg.png" />
-				<h2 id="total-score" class="score total-score">-</h2>
-				<h2 class="score rank"><span id="js-rank-score"></span>/<span id="js-rank-totalplayer"></span></h2>
+			<div id="screen-gameover" class="screen screen-gameover bg-shadow">
+				<img class="w-70" src="./images/game-over.png" />
 			</div>
+			<div id="screen-board" class="screen container screen-board bg-shadow">
+				<div class="header text-center">
+					<img src="./images/leader_board_bg.png" />
+					<h2 id="total-score" class="score total-score">-</h2>
+					<h2 class="score rank"><span id="js-rank-score"></span>/<span id="js-rank-totalplayer"></span></h2>
+				</div>
 
-			<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
-				<img src="./images/close.png" />
-			</button>
+				<button id="btn-close-popup" class="btn-close" onclick="closePopup()">
+					<img src="./images/close.png" />
+				</button>
 
-			<div class="button-group">
-				<div class="footer-tower">
-					<div class="footer-tower-overlay"></div>
-					<img class="tower-left" src="./images/footer_tower_left.png" />
-					<button onclick="clearCanvas(); gameStart(1);">
-						<img class="btn-playagain" src="./images/play-again.png" />
-					</button>
-					<img class="tower-right" src="./images/footer_tower_right.png" />
+				<div class="button-group">
+					<div class="footer-tower">
+						<div class="footer-tower-overlay"></div>
+						<img class="tower-left" src="./images/footer_tower_left.png" />
+						<button onclick="clearCanvas(); gameStart(1);">
+							<img class="btn-playagain" src="./images/play-again.png" />
+						</button>
+						<img class="tower-right" src="./images/footer_tower_right.png" />
+					</div>
 				</div>
 			</div>
 		</div>

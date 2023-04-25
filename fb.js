@@ -1,6 +1,9 @@
 var GAME_ID = 'oreo';
 var POINT_EARED = 12;
 var API_URL = 'https://api.flowco.io';
+var MOBILE_BREAKPOINT = 480;
+
+var screenWidth, screenHeight;
 
 var canvas, ctx;
 var width, height, birdPos;
@@ -243,11 +246,12 @@ function is_touch_device() {
   }
 }
 
-var initCanvas = function () {
+var initCanvas = function () { 
   canvas = document.getElementById('canvas');
   ctx = canvas.getContext('2d');
-  canvas.width = width = Math.min(875, window.innerWidth);
-  canvas.height = height = Math.min(875, window.innerHeight);
+  canvas.width = width = Math.min(875, screenWidth);
+  canvas.height = height = Math.min(875, screenHeight);
+
   document.getElementById('game').width = width;
   document.getElementById('game').height = height;
   if (is_touch_device()) {
@@ -369,8 +373,7 @@ var drawLand = function () {
   }
 };
 
-var addScore = function (val) {
-  console.log(val);
+var addScore = function (val) { 
   score += val;
   lastTimeExtraScore = new Date().getTime();
   soundOn && soundEarnPoint.play();
@@ -388,8 +391,7 @@ var drawScoreImg = function () {
 };
 
 var drawPipe = function (x, y, pipeIndex) {
-  var PIPE_HEIGHT = 50,
-    STAR_HEIGHT = 42,
+  var PIPE_HEIGHT = 50, 
     ROCK_HEIGHT = 18;
   const upPipesNumber = Math.round(y / PIPE_HEIGHT);
   const upColumnLength = upPipesNumber * PIPE_HEIGHT;
@@ -457,7 +459,7 @@ var drawPipeItem = function (x, y, mode, isBreak, isBlank) {
     if (isDrawUp) {
       ctx.drawImage(pipeUp, x, y);
     } else {
-      var isMobile = canvas.width <= 480 ? true : false;
+      var isMobile = canvas.width <= MOBILE_BREAKPOINT ? true : false;
 
       var cotSpace = isMobile ? 60 : 32;
       ctx.drawImage(pipeDown, x, y - cotSpace);
@@ -513,39 +515,7 @@ var drawRock = function (x, y, indexRock) {
     if (birdF % 6 == 0) birdN = (birdN + 1) % 3;
   }
 };
-
-// var drawStarE = function (x, y, idx) {
-//   if (x < birdPos + 45 && x + 50 > birdPos && Math.abs(birdY - y) < 35) {
-//     console.log('add score star');
-//   }
-
-//   const dropPoint = width < 400 ? width : 0.5 * width;
-//   if (x < dropPoint) {
-//     stars[idx] = stars[idx] + 1;
-//     ctx.drawImage(star, x, y);
-//   } else {
-//     ctx.drawImage(star, birdN, 0, star.width, star.height, x, y, star.width, star.height);
-//     birdF = (birdF + 1) % 6;
-//     if (birdF % 6 == 0) birdN = (birdN + 1) % 3;
-//   }
-// };
-
-// var drawStar = function (x, y) {
-//   var STAR_WITH = 40;
-//   if (x < birdPos + 45 && x + 50 > birdPos && Math.abs(birdY - y) < 35) {
-//     console.log('add score star');
-//     addScore(5);
-//   } else {
-//     const dropPoint = width < 400 ? width : 0.5 * width;
-//     if (x < dropPoint) {
-//       ctx.drawImage(star, x, y);
-//     } else {
-//       ctx.drawImage(star, birdN, 0, star.width, star.height, x, y, star.width, star.height);
-//       birdF = (birdF + 1) % 6;
-//       if (birdF % 6 == 0) birdN = (birdN + 1) % 3;
-//     }
-//   }
-// };
+ 
 
 var drawBird = function () {
   var BIRD_POS = 52;
@@ -818,54 +788,57 @@ var gameStart = function (mode) {
 };
 
 function fixBoxSize(screenId, width, height) {
-  // $(screenId).css('width', `${width}px`);
-  // $(screenId).css('height', `height`);
-  console.log('width, height', width, height);
   $(screenId).width(width).height(height);
 }
 
-function onResize() {
-  // fix height
-  const screenHeight = window.innerHeight;
-  let screenWidth = window.innerWidth;
-
-  if (screenWidth > 480) {
-    screenWidth = (screenHeight * 320) / 455;
+function convertFloat(str) {
+  if (!str) {
+    return 1;
   }
-  fixBoxSize('#game', screenWidth, screenHeight);
-  fixBoxSize('#screen-start', screenWidth, screenHeight);
-  fixBoxSize('#screen-gameover', screenWidth, screenHeight); 
-  fixBoxSize('#screen-board', screenWidth, screenHeight);
-
-  if(canvas){
-    canvas.width = screenWidth;
-    canvas.height = screenHeight;
-    drawCanvas();
+  try {
+    var temp = str.replace(/[^0-9.-]+/g, '');
+    return parseFloat(temp);
+  } catch (e) {
+    return 1;
   }
-  
 }
 
 window.onload = function () {
-  onResize();
-
-  // reset variable
+  // reset
   mode = 0;
   score = 0;
   realScore = -1;
   playdata = [0, 0];
   maxScore = 0;
-  dropSpeed = 0.3;
+  dropSpeed = 0.2;
+  mode = 0;
   delta = 100;
+
+  // document.getElementById('c').width = 615;
+  // document.getElementById('screen-start').height = 876;
+  const isDesktop = window.innerWidth > MOBILE_BREAKPOINT;
+  console.log('isDesktop', isDesktop);
+  
+  if (isDesktop) {
+    var ratio = 1.39549;
+     screenWidth = 320 * 1.39549;
+     screenHeight = 455 * ratio;
+    document.getElementById('content-wrapper').style.transform = `scale(${ratio})`;
+  } else{
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+  }
+
+  fixBoxSize('#game', screenWidth, screenHeight);
+  fixBoxSize('#screen-start', screenWidth, screenHeight);
+  fixBoxSize('#screen-gameover', screenWidth, screenHeight);
+  fixBoxSize('#screen-board', screenWidth, screenHeight);
+  
   initCanvas();
   loadSounds();
   soundControl();
-  $('#game .timer').hide();
-
-  // window.onresize = function () {
-  //   onResize();
-  // };
 };
-
+ 
 function addClassTo(el, className) {
   if (!$(el).hasClass(className)) {
     $(el).addClass(className);
@@ -881,23 +854,44 @@ function switchScreen(screenId) {
 
 function openEndScreen() {
   soundStart.stop();
+
+  // game over
+  switchScreen('screen-gameover');
+
   addClassTo('#footer-game', 'hidden');
   addClassTo('#screen-start', 'hidden');
-  $('#total-score').html(score);
 
-  if (countDown > 0) {
-    // game over
-    switchScreen('screen-gameover');
-  } else {
-    soundOn && soundWin.play();
-    showResultBoard();
-  }
+  $('#total-score').html(score);
  
   $('#screen-gameover').click(function () {
     soundOn && soundWin.play();
     showResultBoard();
   });
 }
+
+
+// function openEndScreen() {
+//   soundStart.stop();
+
+//   console.log('openEndScreen', countDown);
+  
+//   if (countDown > 0) {
+//     // game over
+//     switchScreen('screen-gameover');
+//   } else {
+//     soundOn && soundWin.play();
+//     showResultBoard();
+//   }
+
+//   addClassTo('#footer-game', 'hidden');
+//   addClassTo('#screen-start', 'hidden');
+//   $('#total-score').html(score);
+  
+//   $('#screen-gameover').click(function () {
+//     soundOn && soundWin.play();
+//     showResultBoard();
+//   });
+// }
 
 function showResultBoard() {
   clearCanvas();
@@ -941,6 +935,7 @@ function soundControl() {
 
 function closePopup() {
   window.parent.postMessage('closePopup', '*');
+  switchScreen('screen-start');
 }
 
 function share(type) {
