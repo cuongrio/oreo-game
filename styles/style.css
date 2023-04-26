@@ -37,6 +37,16 @@
     overflow: hidden;
 }
 
+#loading {
+    font-size: 42px;
+    font-style: italic;
+    margin: 0; 
+    z-index: 1;
+    right: 24px;
+    color: #fff;
+    font-family: "BwSurcoBlackItalic", sans-serif;
+    text-shadow: 1px 1px #485c1b;
+}
 
 .content-wrapper {
     position: absolute;

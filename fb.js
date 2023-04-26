@@ -246,7 +246,7 @@ function is_touch_device() {
   }
 }
 
-var initCanvas = function () { 
+var initCanvas = function () {
   canvas = document.getElementById('canvas');
   ctx = canvas.getContext('2d');
   canvas.width = width = Math.min(875, screenWidth);
@@ -373,7 +373,7 @@ var drawLand = function () {
   }
 };
 
-var addScore = function (val) { 
+var addScore = function (val) {
   score += val;
   lastTimeExtraScore = new Date().getTime();
   soundOn && soundEarnPoint.play();
@@ -391,7 +391,7 @@ var drawScoreImg = function () {
 };
 
 var drawPipe = function (x, y, pipeIndex) {
-  var PIPE_HEIGHT = 50, 
+  var PIPE_HEIGHT = 50,
     ROCK_HEIGHT = 18;
   const upPipesNumber = Math.round(y / PIPE_HEIGHT);
   const upColumnLength = upPipesNumber * PIPE_HEIGHT;
@@ -471,12 +471,14 @@ var drawStarX = function (x, y) {
   var STAR_WITH = 40;
   if (x < birdPos + STAR_WITH && x + STAR_WITH > birdPos && Math.abs(birdY - y) < STAR_WITH + 5) {
     if (!disableAddScore) {
+      // console.log('x, y', x, y, star.width, star.height);
+      // ctx.clearRect(x, y, star.width + 100, star.height + 100);
       addScore(5);
     }
     disableAddScore = true;
     setTimeout(() => {
       disableAddScore = false;
-    }, 500);
+    }, 1000);
   } else {
     ctx.drawImage(star, x + STAR_WITH, y);
   }
@@ -515,7 +517,6 @@ var drawRock = function (x, y, indexRock) {
     if (birdF % 6 == 0) birdN = (birdN + 1) % 3;
   }
 };
- 
 
 var drawBird = function () {
   var BIRD_POS = 52;
@@ -814,17 +815,14 @@ window.onload = function () {
   mode = 0;
   delta = 100;
 
-  // document.getElementById('c').width = 615;
-  // document.getElementById('screen-start').height = 876;
   const isDesktop = window.innerWidth > MOBILE_BREAKPOINT;
-  console.log('isDesktop', isDesktop);
-  
+
   if (isDesktop) {
     var ratio = 1.39549;
-     screenWidth = 320 * 1.39549;
-     screenHeight = 455 * ratio;
+    screenWidth = 320 * 1.39549;
+    screenHeight = 455 * ratio;
     document.getElementById('content-wrapper').style.transform = `scale(${ratio})`;
-  } else{
+  } else {
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
   }
@@ -833,12 +831,12 @@ window.onload = function () {
   fixBoxSize('#screen-start', screenWidth, screenHeight);
   fixBoxSize('#screen-gameover', screenWidth, screenHeight);
   fixBoxSize('#screen-board', screenWidth, screenHeight);
-  
+
   initCanvas();
   loadSounds();
   soundControl();
 };
- 
+
 function addClassTo(el, className) {
   if (!$(el).hasClass(className)) {
     $(el).addClass(className);
@@ -855,26 +853,30 @@ function switchScreen(screenId) {
 function openEndScreen() {
   soundStart.stop();
 
-  // game over
-  switchScreen('screen-gameover');
+  if (countDown > 0) {
+    // game over
+    switchScreen('screen-gameover');
+  } else {
+    soundOn && soundWin.play();
+    showResultBoard();
+  }
 
   addClassTo('#footer-game', 'hidden');
   addClassTo('#screen-start', 'hidden');
 
   $('#total-score').html(score);
- 
+
   $('#screen-gameover').click(function () {
     soundOn && soundWin.play();
     showResultBoard();
   });
 }
 
-
 // function openEndScreen() {
 //   soundStart.stop();
 
 //   console.log('openEndScreen', countDown);
-  
+
 //   if (countDown > 0) {
 //     // game over
 //     switchScreen('screen-gameover');
@@ -886,7 +888,7 @@ function openEndScreen() {
 //   addClassTo('#footer-game', 'hidden');
 //   addClassTo('#screen-start', 'hidden');
 //   $('#total-score').html(score);
-  
+
 //   $('#screen-gameover').click(function () {
 //     soundOn && soundWin.play();
 //     showResultBoard();
